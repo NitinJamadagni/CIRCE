@@ -1,4 +1,4 @@
-Tag,Node,Region
-node1,USERNAME1@IP1,LOC1,PASSWORD1
-node2,USERNAME2@IP2,LOC2,PASSWORD2
-node3,USERNAME3@IP3,LOC3,PASSWORD3
+Tag,Node,Region,Password
+node1,nitin@11.0.0.2,LOC1,nitin
+node2,nitin@11.0.0.3,LOC1,nitin
+node3,nitin@11.0.0.4,LOC1,nitin

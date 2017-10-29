@@ -34,7 +34,7 @@ for i in range(0, len(task_list)):
 
 task_size = {}
 for j in range(1, num_nodes+1):
-    file_name = 'profiler_node'+str(j)+'.txt'
+    file_name = '../profiler_node'+str(j)+'.txt'
     with open(file_name) as inf:
         first_line = inf.readline()
         i=0
@@ -92,8 +92,7 @@ db = client_mongo.central_network_profiler
 logging = db['quadratic_parameters'].find().skip(db['quadratic_parameters'].count() - num_quadratic)
 processor_map = ['BLR','NYC','FRA']
 processor_dict = dict(zip(processor_map,processor_list))
-for i in range(0,logging.count()):
-    record = logging.next()
+for record in logging:
     info_to_csv=[processor_dict.get(str(record['Source[Reg]'])),processor_dict.get(str(record['Destination[Reg]'])),str(record['Parameters'])]
     line = '  %s %s\t%s\n'%(info_to_csv[0],info_to_csv[1],info_to_csv[2])
     target.write(line)
