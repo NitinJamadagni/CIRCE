@@ -60,9 +60,11 @@ def init(filename):
     line = f.readline()
 
     while line.startswith('  '):
-        i,j = line.split()[0:2]
-        a,b,c = [float(s) for s in line.split()[2:]]
-        quaratic_profile[int(i[1])-1][int(j[1])-1] = tuple([a,b,c])
+	linesplit = line.strip().split('\t')
+	i = int(linesplit[0].split(' ')[0][4:])
+        j = int(linesplit[0].split(' ')[1][4:])
+        a,b,c = [float(s) for s in linesplit[1].split(' ')]
+        quaratic_profile[i-1][j-1] = tuple([a,b,c])
         line = f.readline()
 
     return [num_of_tasks, num_of_processors, comp_cost, rate, data, quaratic_profile]

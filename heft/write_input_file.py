@@ -71,7 +71,7 @@ target.write('}')
 num_processor = 3
 target.write('\n@computation_cost 0 {\n')
 
-processor_list=['p%d'%(i+1) for i in range(0,num_processor)]
+processor_list=['node%d'%(i+1) for i in range(0,num_processor)]
 line = '# type version %s\n' %(' '.join(processor_list))
 target.write(line)
 
@@ -83,17 +83,19 @@ for i in range(0,len(task_list)):
 target.write('}')
 target.write('\n\n\n\n')
 
-num_processor = 2
+num_processor = 3
 num_quadratic = num_processor*(num_processor-1)
 target.write('\n@quadratic 0 {\n')
 target.write('# Source Destination a b c\n')
 client_mongo = MongoClient('mongodb://localhost:27017/')
 db = client_mongo.central_network_profiler
-logging = db['quadratic_parameters'].find().skip(db['quadratic_parameters'].count() - num_quadratic)
+#logging = db['quadratic_parameters'].find().skip(db['quadratic_parameters'].count() - num_quadratic)
+logging = db['quadratic_parameters'].find().sort([("Time_Stamp[UTC]",pymongo.ASCENDING)]).limit(num_quadratic)
 processor_map = ['BLR','NYC','FRA']
-processor_dict = dict(zip(processor_map,processor_list))
+#processor_dict = dict(zip(processor_map,processor_list))
+processor_dict = {"11.0.0.2":"node1","11.0.0.3":"node2","11.0.0.4":"node3"}
 for record in logging:
-    info_to_csv=[processor_dict.get(str(record['Source[Reg]'])),processor_dict.get(str(record['Destination[Reg]'])),str(record['Parameters'])]
+    info_to_csv=[processor_dict.get(str(record['Source[IP]'])),processor_dict.get(str(record['Destination[IP]'])),str(record['Parameters'])]
     line = '  %s %s\t%s\n'%(info_to_csv[0],info_to_csv[1],info_to_csv[2])
     target.write(line)
 
