@@ -54,7 +54,7 @@ def connectAndStopScript(node):
 	print "starting connection with node :" + str(node)
 
 	chan = ssh.get_transport().open_session()
-	command = "cd $HOME/DR;forever start script.js $HOME/DR/flows/" + task + " 8000"
+	command = "cd $HOME/DR;forever stop script.js"
 	chan.exec_command(command)
 	chan.recv_exit_status()
 	print "stopped node-red flow on node :" + node
