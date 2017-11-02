@@ -1,6 +1,7 @@
 /*
 	*	Author : Nitin Jamadagni
 	*	USAGE : node script.js </full/path/to/flow.json/in/node-red/format> <port_number>  OR  forever start script.js </full/path/to/flow.json/in/node-red/format> <port_number>
+	* 	Precursors : have environment variable NODE_MODULES_ROOT set to /node/installation/lib/node_modules
 */
 
 // USAGE : 
@@ -46,7 +47,7 @@ var serverPort = parseInt(process.argv[3]);
 var app = express();
 var setApp = app.use("/",express.static("public"));
 var server = http.createServer(app);
-var settings = {httpAdminRoot:"/red",httpNodeRoot: "/api",userDir:"/home/nitin/Desktop/DRWORK/node-red/", functionGlobalContext: {}};
+var settings = {httpAdminRoot:"/red",httpNodeRoot: "/api",userDir:"/home/nitin/DR/node-red/", functionGlobalContext: {}};
 var init = RED.init(server,settings);
 console.log("init RED");
 app.use(settings.httpAdminRoot,RED.httpAdmin);
