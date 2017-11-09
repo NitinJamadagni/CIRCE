@@ -1,7 +1,7 @@
 """
 	* Author : Nitin Jamadagni
 	* USAGE : python scheduleNodeRed.py <OPTION> <nodesInfoFile> <CIRCEOutputFile>
-				<OPTION> : START STOP
+				<OPTION> : START STOP CLNDDEP
 """
 
 '''
@@ -11,7 +11,7 @@ Imports section
 import sys
 
 if (len(sys.argv) != 4):
-	print "usage : python scheduleNodeRed.py <OPTION> <nodesInfoFile> <CIRCEOutputFile> \n     <OPTION> : START/STOP"
+	print "usage : python scheduleNodeRed.py <OPTION> <nodesInfoFile> <CIRCEOutputFile> \n     <OPTION> : START/STOP/CLNDDEP"
 	sys.exit()
 
 print "assumed configurations :\n1)$HOME/DR/flows file exists with all the required flows on scheduler machine\n2)Each droplet machines have $HOME/DR/script.js\n3)Each droplet has $HOME/DR/flows/\n4)Have dependencies installed"
